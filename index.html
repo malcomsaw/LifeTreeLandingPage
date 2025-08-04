@@ -1,9 +1,7 @@
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LifeTree: Visualize Your Mind</title>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -28,22 +26,412 @@
       body {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        background-color: #0f172a; /* bg-slate-900 */
+        color: #cbd5e1; /* text-slate-300 */
+        font-family: 'Inter', sans-serif;
+      }
+      .selection\:bg-green-500\/30::selection {
+        background-color: rgba(34, 197, 94, 0.3);
+      }
+      .hidden {
+        display: none;
+      }
+      @keyframes fadeInScale {
+          to {
+              opacity: 1;
+              transform: scale(1);
+          }
+      }
+      .animate-fade-in-scale {
+          animation: fadeInScale 0.3s ease-out;
       }
     </style>
-
-<link rel="stylesheet" href="/index.css">
-  <script type="importmap">
-{
-  "imports": {
-    "react/": "https://esm.sh/react@^19.1.1/",
-    "react": "https://esm.sh/react@^19.1.1",
-    "react-dom/": "https://esm.sh/react-dom@^19.1.1/"
-  }
-}
-</script>
-  <script type="module" crossorigin src="/assets/index-BavcbVSW.js"></script>
 </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<body class="bg-slate-900 text-slate-300 font-sans antialiased selection:bg-green-500/30">
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-slate-900/80 backdrop-blur-sm border-b border-slate-800/50">
+      <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <div class="text-xl font-bold text-white">
+          <span role="img" aria-label="leaf" class="mr-2">🌿</span>LifeTree
+        </div>
+        <button
+          id="header-waitlist-button"
+          class="bg-green-600 text-white font-bold py-2 px-5 rounded-full hover:bg-green-500 transition-colors duration-300"
+        >
+          Join Waitlist
+        </button>
+      </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative flex items-center justify-center min-h-screen pt-20 overflow-hidden">
+            <!-- Distinct Creative Hero Background -->
+            <div class="absolute top-0 left-0 w-full h-full z-0 pointer-events-none">
+                <div class="absolute left-1/4 top-1/4 w-[60vw] h-[60vw] bg-green-400 opacity-40 rounded-full blur-[120px] animate-pulse" style="animation-duration: 6s;"></div>
+                <div class="absolute right-0 top-1/3 w-[40vw] h-[40vw] bg-blue-500 opacity-30 rounded-full blur-[100px] animate-pulse" style="animation-duration: 8s; animation-delay: 2s;"></div>
+                <div class="absolute left-0 bottom-0 w-[30vw] h-[30vw] bg-green-300 opacity-30 rounded-full blur-[80px] animate-spin-slow"></div>
+                <div class="absolute right-1/4 bottom-1/4 w-[35vw] h-[35vw] bg-purple-500 opacity-20 rounded-full blur-[90px] animate-pulse" style="animation-duration: 10s; animation-delay: 3s;"></div>
+                <div class="absolute inset-0 w-full h-full bg-gradient-to-b from-green-700/30 via-transparent to-slate-900/80"></div>
+            </div>
+            <div class="relative z-10 container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight tracking-tight drop-shadow-lg">
+                    Declutter Your Mind. <br class="hidden md:block"/>See Your Life. <br class="hidden md:block"/>Make Better Decisions.
+                </h1>
+                <p class="mt-6 max-w-2xl mx-auto text-lg md:text-xl text-slate-300 drop-shadow">
+                    LifeTree helps you map your thoughts, decisions, emotions, and experiences into a visual canvas — so you can finally see yourself clearly.
+                </p>
+                <div class="mt-10">
+                    <button
+                        id="hero-waitlist-button"
+                        class="bg-green-600 text-white font-bold py-4 px-8 rounded-full text-lg hover:bg-green-500 transform hover:scale-105 transition-all duration-300 ease-in-out shadow-lg shadow-green-600/20"
+                    >
+                        → Join Waitlist
+                    </button>
+                </div>
+            </div>
+            <div class="absolute bottom-0 left-0 w-full h-8 bg-gradient-to-t from-slate-900/90 to-transparent"></div>
+        </section>
+
+        <!-- WhatIs Section -->
+        <section class="py-20 sm:py-32 bg-slate-900">
+          <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-white">
+                    What’s LifeTree?
+                </h2>
+                <p class="mt-4 text-lg text-slate-400">
+                    LifeTree is a personal mind mapping app that turns your thoughts, feelings, decisions, and memories into a visual decision tree.
+                </p>
+            </div>
+            <div class="mt-16 max-w-2xl mx-auto">
+                <ul class="space-y-6">
+                    <li class="flex items-start">
+                        <div class="flex-shrink-0 pt-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <p class="ml-4 text-lg text-slate-300">Visualize your life’s biggest patterns</p>
+                    </li>
+                    <li class="flex items-start">
+                        <div class="flex-shrink-0 pt-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <p class="ml-4 text-lg text-slate-300">Understand emotional triggers and behaviors</p>
+                    </li>
+                    <li class="flex items-start">
+                        <div class="flex-shrink-0 pt-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <p class="ml-4 text-lg text-slate-300">Connect past events to current beliefs</p>
+                    </li>
+                    <li class="flex items-start">
+                        <div class="flex-shrink-0 pt-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <p class="ml-4 text-lg text-slate-300">Spot repeated mistakes and hidden growth</p>
+                    </li>
+                    <li class="flex items-start">
+                        <div class="flex-shrink-0 pt-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <p class="ml-4 text-lg text-slate-300">Choose with clarity instead of chaos</p>
+                    </li>
+                </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Why Section -->
+        <section class="py-20 sm:py-32 bg-slate-800/50">
+            <div class="container mx-auto px-6">
+                <div class="max-w-3xl mx-auto text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Why You’ll Want LifeTree</h2>
+                </div>
+                <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-slate-800 p-8 rounded-2xl shadow-lg border border-slate-700 hover:border-green-500/50 transition-colors duration-300">
+                        <p class="text-xl font-semibold text-white mb-4">
+                            <span class="text-2xl mr-3" role="img" aria-label="question mark">❓</span>
+                            Feel constantly overwhelmed by your thoughts?
+                        </p>
+                        <p class="text-lg text-green-400 flex items-start">
+                            <span class="font-bold mr-3 text-2xl leading-none">→</span>
+                            <span>LifeTree helps you unpack them visually.</span>
+                        </p>
+                    </div>
+                    <div class="bg-slate-800 p-8 rounded-2xl shadow-lg border border-slate-700 hover:border-green-500/50 transition-colors duration-300">
+                        <p class="text-xl font-semibold text-white mb-4">
+                            <span class="text-2xl mr-3" role="img" aria-label="question mark">❓</span>
+                            Keep looping through the same life problems?
+                        </p>
+                        <p class="text-lg text-green-400 flex items-start">
+                            <span class="font-bold mr-3 text-2xl leading-none">→</span>
+                            <span>Map out past decisions and where they lead.</span>
+                        </p>
+                    </div>
+                    <div class="bg-slate-800 p-8 rounded-2xl shadow-lg border border-slate-700 hover:border-green-500/50 transition-colors duration-300">
+                        <p class="text-xl font-semibold text-white mb-4">
+                            <span class="text-2xl mr-3" role="img" aria-label="question mark">❓</span>
+                            Struggling to grow or change?
+                        </p>
+                        <p class="text-lg text-green-400 flex items-start">
+                            <span class="font-bold mr-3 text-2xl leading-none">→</span>
+                            <span>Trace your beliefs, fears, and experiences.</span>
+                        </p>
+                    </div>
+                    <div class="bg-slate-800 p-8 rounded-2xl shadow-lg border border-slate-700 hover:border-green-500/50 transition-colors duration-300">
+                        <p class="text-xl font-semibold text-white mb-4">
+                            <span class="text-2xl mr-3" role="img" aria-label="question mark">❓</span>
+                            Traditional journaling not working?
+                        </p>
+                        <p class="text-lg text-green-400 flex items-start">
+                            <span class="font-bold mr-3 text-2xl leading-none">→</span>
+                            <span>LifeTree is structured, visual, and smart.</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ForWhom Section -->
+        <section class="py-20 sm:py-32 bg-slate-900">
+          <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white">
+              A Tool for Reflective Minds
+            </h2>
+            <p class="mt-4 text-lg text-slate-400">
+                Whether you’re:
+            </p>
+            <div class="mt-8 flex flex-wrap justify-center gap-4">
+              <span class="bg-slate-800 text-slate-300 py-2 px-5 rounded-full text-md md:text-lg border border-slate-700">
+                Going through a quarter-life crisis
+              </span>
+              <span class="bg-slate-800 text-slate-300 py-2 px-5 rounded-full text-md md:text-lg border border-slate-700">
+                Starting therapy or self-coaching
+              </span>
+              <span class="bg-slate-800 text-slate-300 py-2 px-5 rounded-full text-md md:text-lg border border-slate-700">
+                Recovering from burnout
+              </span>
+              <span class="bg-slate-800 text-slate-300 py-2 px-5 rounded-full text-md md:text-lg border border-slate-700">
+                Planning a new chapter of life...
+              </span>
+            </div>
+            <p class="mt-16 text-2xl md:text-3xl font-bold text-green-400 max-w-3xl mx-auto">
+              LifeTree shows you the map of your mind.
+            </p>
+          </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800">
+      <div class="container mx-auto px-6 py-8 text-center text-slate-500">
+        <p class="font-bold text-slate-400"><span role="img" aria-label="leaf" class="mr-2">🌿</span>LifeTree</p>
+        <p class="mt-2 text-sm">&copy; 2024 LifeTree. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Waitlist Modal -->
+    <div
+      id="waitlist-modal"
+      class="fixed hidden inset-0 z-[100] flex items-center justify-center bg-black bg-opacity-70 backdrop-blur-sm transition-opacity duration-300"
+      aria-labelledby="waitlist-modal-title"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div
+        id="modal-panel"
+        class="bg-slate-800 border border-slate-700 rounded-2xl shadow-2xl w-full max-w-md m-4 transform transition-all duration-300 scale-95 opacity-0 animate-fade-in-scale"
+        style="animation-fill-mode: forwards;"
+      >
+        <div class="p-8 relative">
+          <button
+            id="modal-close-button"
+            class="absolute top-4 right-4 text-slate-500 hover:text-white transition-colors"
+            aria-label="Close"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+          </button>
+          
+          <div id="modal-success-view" class="hidden text-center">
+            <h2 id="waitlist-modal-title-success" class="text-2xl font-bold text-green-400 mb-4">You're on the list!</h2>
+            <p class="text-slate-300">
+              Thank you for joining. We'll send an email to you when LifeTree is ready to launch.
+            </p>
+            <button
+              id="modal-success-close-button"
+              class="mt-6 w-full bg-green-600 text-white font-bold py-3 px-5 rounded-full hover:bg-green-500 transition-colors duration-300"
+            >
+              Close
+            </button>
+          </div>
+
+          <div id="modal-form-view">
+            <h2 id="waitlist-modal-title" class="text-2xl font-bold text-white mb-2">Join the Waitlist</h2>
+            <p class="text-slate-400 mb-6">Be the first to know when LifeTree launches.</p>
+            <form id="waitlist-form" noValidate>
+              <div class="space-y-4">
+                  <label for="email" class="sr-only">Email address</label>
+                  <input
+                    id="email-input"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    required
+                    class="w-full bg-slate-900 border border-slate-700 rounded-lg py-3 px-4 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-green-500"
+                    placeholder="you@example.com"
+                  />
+              </div>
+
+              <p id="modal-error-message" class="text-red-400 text-sm mt-3 text-center hidden"></p>
+              
+              <button
+                id="form-submit-button"
+                type="submit"
+                class="mt-4 w-full bg-green-600 text-white font-bold py-3 px-5 rounded-full hover:bg-green-500 transition-colors duration-300 disabled:bg-slate-600 disabled:cursor-not-allowed flex items-center justify-center"
+              >
+                <span id="submit-button-text">Get Early Access</span>
+                <span id="submit-spinner" class="hidden">
+                    <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                </span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // --- CONFIGURATION ---
+        const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mwpqnzyr';
+
+        // --- DOM ELEMENTS ---
+        const modal = document.getElementById('waitlist-modal');
+        const modalPanel = document.getElementById('modal-panel');
+        const openModalButtons = [
+            document.getElementById('header-waitlist-button'),
+            document.getElementById('hero-waitlist-button')
+        ];
+        const closeModalButton = document.getElementById('modal-close-button');
+        const successCloseButton = document.getElementById('modal-success-close-button');
+        
+        const formView = document.getElementById('modal-form-view');
+        const successView = document.getElementById('modal-success-view');
+        const waitlistForm = document.getElementById('waitlist-form');
+        const emailInput = document.getElementById('email-input');
+        const submitButton = document.getElementById('form-submit-button');
+        const buttonText = document.getElementById('submit-button-text');
+        const buttonSpinner = document.getElementById('submit-spinner');
+        const errorMessage = document.getElementById('modal-error-message');
+
+        // --- FUNCTIONS ---
+        const openModal = () => {
+          if (!modal) return;
+          // Reset form state
+          formView.classList.remove('hidden');
+          successView.classList.add('hidden');
+          emailInput.value = '';
+          errorMessage.classList.add('hidden');
+          errorMessage.textContent = '';
+          submitButton.disabled = false;
+          buttonText.classList.remove('hidden');
+          buttonSpinner.classList.add('hidden');
+
+          modal.classList.remove('hidden');
+          setTimeout(() => emailInput.focus(), 50); // Small delay for CSS transition
+        };
+
+        const closeModal = () => {
+          if (!modal) return;
+          modal.classList.add('hidden');
+        };
+
+        const showFormError = (message) => {
+            errorMessage.textContent = message;
+            errorMessage.classList.remove('hidden');
+        };
+
+        const handleFormSubmit = async (event) => {
+          event.preventDefault();
+          
+          if (FORMSPREE_ENDPOINT.includes('YOUR_UNIQUE_CODE') || FORMSPREE_ENDPOINT === '') {
+            showFormError('Form endpoint is not configured.');
+            return;
+          }
+
+          // UI loading state
+          submitButton.disabled = true;
+          buttonText.classList.add('hidden');
+          buttonSpinner.classList.remove('hidden');
+          errorMessage.classList.add('hidden');
+
+          const formData = new FormData(waitlistForm);
+          
+          try {
+            const response = await fetch(FORMSPREE_ENDPOINT, {
+              method: 'POST',
+              body: formData,
+              headers: {
+                'Accept': 'application/json'
+              }
+            });
+
+            if (response.ok) {
+              // Show success view
+              formView.classList.add('hidden');
+              successView.classList.remove('hidden');
+            } else {
+              // Handle server errors
+              showFormError('Something went wrong. Please try again.');
+              submitButton.disabled = false;
+              buttonText.classList.remove('hidden');
+              buttonSpinner.classList.add('hidden');
+            }
+          } catch (error) {
+            // Handle network errors
+            console.error('Submission error:', error);
+            showFormError('Could not connect. Please check your connection.');
+            submitButton.disabled = false;
+            buttonText.classList.remove('hidden');
+            buttonSpinner.classList.add('hidden');
+          }
+        };
+
+        // --- EVENT LISTENERS ---
+        openModalButtons.forEach(button => {
+          if (button) button.addEventListener('click', openModal);
+        });
+
+        if (closeModalButton) closeModalButton.addEventListener('click', closeModal);
+        if (successCloseButton) successCloseButton.addEventListener('click', closeModal);
+
+        // Close modal on backdrop click
+        if (modal) {
+          modal.addEventListener('click', (event) => {
+            if (event.target === modal) {
+              closeModal();
+            }
+          });
+        }
+
+        // Close modal on 'Escape' key press
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape' && !modal.classList.contains('hidden')) {
+            closeModal();
+          }
+        });
+
+        if (waitlistForm) {
+          waitlistForm.addEventListener('submit', handleFormSubmit);
+        }
+
+        // Update footer year
+        const yearElement = document.querySelector('footer p.text-sm');
+        if (yearElement) {
+            yearElement.innerHTML = `&copy; ${new Date().getFullYear()} LifeTree. All rights reserved.`;
+        }
+      });
+    </script>
+</body>
 </html>
